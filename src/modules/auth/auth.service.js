@@ -45,7 +45,8 @@ export const Emailverify= async(token)=>{
 
 export const loginUser= async (userdata)=>{
     const {email,password}=userdata
-    const user= await User.findOne({email});
+
+    const user= await User.findOne({email}).select('+password');
     if (!user){
         throw new Error('Invalid Credentils')
     }
