@@ -1,5 +1,3 @@
-import {generateToken} from  '../../utils/generateToken.js'
-
 import {createUser,Emailverify,loginUser} from './auth.service.js';
 
 // Register :
@@ -26,16 +24,11 @@ export const verifyEmailController= async(req,res)=>{
 
 export const loginuserController= async (req,res)=>{
     try{
-        const user= await loginUser(req.body);
-        var token
-        if(user.isVerified){
-            token=generateToken({
-                id:user._id,
-                role:user.role
-            });
-            return token
-        }
-        res.json({success:true,token})
+        const result= await loginUser(req.body);
+        res.status(200).json({
+            user:result.user,
+            token:result.token
+        });
     }catch(error){
         res.status(400).json({message:"Invalid Login Credentials"})
     }

@@ -8,7 +8,5 @@ const router=express.Router();
 router.post('/register',registerUserController);
 router.get('/verify-email/:token',verifyEmailController);
 router.post('/login',loginuserController);
-
-
 export default router;
 

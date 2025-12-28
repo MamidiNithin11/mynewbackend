@@ -10,7 +10,6 @@ export const sendVerificationEmail = async (toEmail, token) => {
   });
 
   const verifyLink = `${process.env.BASE_URL}/api/auth/verify-email/${token}`;
-
   await transporter.sendMail({
     from: `"E-Commerce App" <${process.env.EMAIL_USER}>`,
     to: toEmail,

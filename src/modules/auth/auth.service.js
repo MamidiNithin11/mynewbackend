@@ -1,7 +1,9 @@
 import User from '../../models/User.js';
-import {sendVerificationEmail} from '../../utils/sendVerificationEmail.js'
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto'
+import {sendVerificationEmail} from '../../utils/sendVerificationEmail.js'
+import {generateToken} from "../../utils/token.js"
+
 
 export const createUser= async (userData)=>{
     const {name,email,password}=userData;
@@ -43,7 +45,6 @@ export const Emailverify= async(token)=>{
 
 export const loginUser= async (userdata)=>{
     const {email,password}=userdata
-
     const user= await User.findOne({email});
     if (!user){
         throw new Error('Invalid Credentils')
@@ -52,11 +53,18 @@ export const loginUser= async (userdata)=>{
     if (!user.isVerified){
         throw new Error("Please verify your email first")
     }
-    const isMatch=await bcrypt.compare(password,user.password);
 
-    if(isMatch){
-        return user;
-    }else {
-        throw new Error('Invalid Credentials')
+    const isMatch=await bcrypt.compare(password,user.password)
+    if (!isMatch){
+        throw new Error("Invalid Credentilas")
+    }
+    const token=generateToken(user._id)
+    return {
+        user:{
+            id:user._id,
+            name:user.name,
+            email:user.email
+        },
+        token
     };
-}
+};
