@@ -3,6 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authRoutes from './modules/auth/auth.route.js';
+import userRoutes from './modules/user/user.route.js'
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +20,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/users',userRoutes)
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'API is running smoothly' });
