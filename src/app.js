@@ -7,7 +7,6 @@ import userRoutes from './modules/user/user.route.js'
 
 
 const __filename = fileURLToPath(import.meta.url);
-// this for D:/BackendProjects/ecommerce-backend/src 
 const __dirname = path.dirname(__filename);
 
 const app = express();

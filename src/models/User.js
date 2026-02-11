@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: 5,
-      select:false
+      select: true
     },
     role: {
       type: String,
@@ -28,7 +28,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    verificationToken: {type: String}
+    verificationToken: {type: String},
+    verificationTokenExpires:{ type:Date},
+
+    forgotPasswordToken:String,
+    forgotPasswordTokenExpires:Date
   },
   { timestamps: true }
 );

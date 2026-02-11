@@ -1,4 +1,4 @@
-import {getAllUsersService,getUserByIdService} from './user.service.js'
+import {getAllUsersService,getUserByIdService,deleteUserService} from './user.service.js'
 
 export const getAllUsersController=async(req,res)=>{
     try{
@@ -7,13 +7,21 @@ export const getAllUsersController=async(req,res)=>{
     }catch(error){
        res.status(400).json({message:error.message})
     }
-
 }
 
 export const getUserByIdController= async(req,res)=>{
     try{
         const user=await getUserByIdService(req.params.id)
         res.status(200).json(user)
+    }catch(error){
+        res.status(400).json({message:error.message})
+    }
+}
+
+export const deleteUserController = async(req,res)=>{
+    try{
+        const result=await deleteUserService(req.params.id)
+        res.send(result)
     }catch(error){
         res.status(400).json({message:error.message})
     }

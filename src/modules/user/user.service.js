@@ -16,3 +16,11 @@ export const getUserByIdService = async (id)=>{
     }
     return user
 }
+
+export const deleteUserService = async(id)=>{
+    const user=await User.findByIdAndDelete(id)
+    if(!user){
+        throw new Error("User Not Found")
+    }
+    return user
+}
