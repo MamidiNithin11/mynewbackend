@@ -80,19 +80,15 @@ export const loginUser = async ({ email, password }) => {
   };
 };
 
-
 export const forgotPassword= async(email)=>{
     const user=await User.findOne({email});
     if(!user){
         throw new Error("User with this email does not exist");
     }
-
     const resetToken=crypto.randomBytes(32).toString('hex'); // <-Token created Here
-
     user.forgotPasswordToken=resetToken; // Saved in DB
     user.forgotPasswordTokenExpires=Date.now()+60*60*1000; // time (1-Hour) for token expire;
     await user.save();
-
     await sendResetPasswordEmail(user.email,resetToken); // This function can send Mail to User
 }
 

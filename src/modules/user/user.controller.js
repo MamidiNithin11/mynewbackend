@@ -21,7 +21,7 @@ export const getUserByIdController= async(req,res)=>{
 export const deleteUserController = async(req,res)=>{
     try{
         const result=await deleteUserService(req.params.id)
-        res.send(result)
+        res.status(200).json({message:"User deleted successfully", user:result})
     }catch(error){
         res.status(400).json({message:error.message})
     }

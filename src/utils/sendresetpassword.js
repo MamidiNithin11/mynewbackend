@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export const sendResetPasswordEmail =async (email,resetToken)=>{
+export const sendResetPasswordEmail =async(email,resetToken)=>{
     const transporter =nodemailer.createTransport({
         service:'gmail',
         auth:{
