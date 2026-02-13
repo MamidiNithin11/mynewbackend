@@ -20,7 +20,6 @@ export const authorizationMiddleware = (req, res, next) => {
   try {
     const userId = req.params.id;
     const requestingUserId = req.user.id;
-
     // Allow users to delete only their own account
     // Or allow admins to delete any user
     if (userId !== requestingUserId) {
